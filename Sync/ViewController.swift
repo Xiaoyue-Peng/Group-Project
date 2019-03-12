@@ -70,14 +70,14 @@ class ViewController: UIViewController, GCDAsyncSocketDelegate{
             }
             
         }
-//        let fileURL=Bundle.main.url(forResource: "ServerViewController", withExtension: "swift")
-//        let fileString="/Sync/ServerViewCon"
-//        if FileManager.default.fileExists(atPath: fileString!){
-//            print("found")
-//        }else{print("error")}
-//        AF.upload(fileURL!, to: "http://127.0.0.1").responseJSON{response in
-//            debugPrint(response)
-//        }
+        let fileURL=Bundle.main.url(forResource: "ServerViewController", withExtension: "swift")
+        let fileString="/Sync/ServerViewCon"
+        if FileManager.default.fileExists(atPath: fileString!){
+            print("found")
+        }else{print("error")}
+        AF.upload(fileURL!, to: "http://127.0.0.1").responseJSON{response in
+            debugPrint(response)
+        }
     }
 //    func onSocket(sock:GCDAsyncSocket!,didConnectToHost host:String!,port:UInt16){
 //        print("has connect")
