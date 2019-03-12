@@ -71,7 +71,7 @@ class ViewController: UIViewController, GCDAsyncSocketDelegate{
             
         }
         let fileURL=Bundle.main.url(forResource: "ServerViewController", withExtension: "swift")
-        let fileString="/Sync/ServerViewCon"
+        let fileString=fileURL?.path
         if FileManager.default.fileExists(atPath: fileString!){
             print("found")
         }else{print("error")}
