@@ -15,6 +15,14 @@
 		B1A920FF220876F400C91FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A920FD220876F400C91FC9 /* LaunchScreen.storyboard */; };
 		B1A9210A220876F400C91FC9 /* SyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A92109220876F400C91FC9 /* SyncTests.swift */; };
 		B1A92115220876F400C91FC9 /* SyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A92114220876F400C91FC9 /* SyncUITests.swift */; };
+		B1AC9816223565FF00CD1BD1 /* TcpSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC9815223565FF00CD1BD1 /* TcpSocketServer.swift */; };
+		B1AC98182235673100CD1BD1 /* TcpSocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC98172235673100CD1BD1 /* TcpSocketClient.swift */; };
+		B1AC981A22356B0600CD1BD1 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC981922356B0600CD1BD1 /* ServerViewController.swift */; };
+		B1AC981B22357CE500CD1BD1 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AC98132230065E00CD1BD1 /* CocoaAsyncSocket.framework */; };
+		B1AC981C22357CE500CD1BD1 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1AC98132230065E00CD1BD1 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1AC981F2236D08A00CD1BD1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AC981E2236D08A00CD1BD1 /* Alamofire.framework */; };
+		B1AC98202236F0FA00CD1BD1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AC981E2236D08A00CD1BD1 /* Alamofire.framework */; };
+		B1AC98212236F0FA00CD1BD1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B1AC981E2236D08A00CD1BD1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +42,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B1B62234221CCE8A00072CF7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B1AC981C22357CE500CD1BD1 /* CocoaAsyncSocket.framework in Embed Frameworks */,
+				B1AC98212236F0FA00CD1BD1 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B1A920EE220876F200C91FC9 /* Sync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A920F1220876F200C91FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +72,11 @@
 		B1A92110220876F400C91FC9 /* SyncUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1A92114220876F400C91FC9 /* SyncUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUITests.swift; sourceTree = "<group>"; };
 		B1A92116220876F400C91FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1AC98132230065E00CD1BD1 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		B1AC9815223565FF00CD1BD1 /* TcpSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcpSocketServer.swift; sourceTree = "<group>"; };
+		B1AC98172235673100CD1BD1 /* TcpSocketClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TcpSocketClient.swift; sourceTree = "<group>"; };
+		B1AC981922356B0600CD1BD1 /* ServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
+		B1AC981E2236D08A00CD1BD1 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1AC981F2236D08A00CD1BD1 /* Alamofire.framework in Frameworks */,
+				B1AC98202236F0FA00CD1BD1 /* Alamofire.framework in Frameworks */,
+				B1AC981B22357CE500CD1BD1 /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +114,7 @@
 				B1A92108220876F400C91FC9 /* SyncTests */,
 				B1A92113220876F400C91FC9 /* SyncUITests */,
 				B1A920EF220876F200C91FC9 /* Products */,
+				B1B6222B221CC00900072CF7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +138,9 @@
 				B1A920FD220876F400C91FC9 /* LaunchScreen.storyboard */,
 				B1A92100220876F400C91FC9 /* Info.plist */,
 				B1A920F8220876F200C91FC9 /* Sync.xcdatamodeld */,
+				B1AC9815223565FF00CD1BD1 /* TcpSocketServer.swift */,
+				B1AC98172235673100CD1BD1 /* TcpSocketClient.swift */,
+				B1AC981922356B0600CD1BD1 /* ServerViewController.swift */,
 			);
 			path = Sync;
 			sourceTree = "<group>";
@@ -128,6 +163,15 @@
 			path = SyncUITests;
 			sourceTree = "<group>";
 		};
+		B1B6222B221CC00900072CF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC981E2236D08A00CD1BD1 /* Alamofire.framework */,
+				B1AC98132230065E00CD1BD1 /* CocoaAsyncSocket.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +182,7 @@
 				B1A920EA220876F200C91FC9 /* Sources */,
 				B1A920EB220876F200C91FC9 /* Frameworks */,
 				B1A920EC220876F200C91FC9 /* Resources */,
+				B1B62234221CCE8A00072CF7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,7 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1AC9816223565FF00CD1BD1 /* TcpSocketServer.swift in Sources */,
+				B1AC98182235673100CD1BD1 /* TcpSocketClient.swift in Sources */,
 				B1A920FA220876F200C91FC9 /* Sync.xcdatamodeld in Sources */,
+				B1AC981A22356B0600CD1BD1 /* ServerViewController.swift in Sources */,
 				B1A920F4220876F200C91FC9 /* ViewController.swift in Sources */,
 				B1A920F2220876F200C91FC9 /* AppDelegate.swift in Sources */,
 			);
@@ -437,6 +485,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4NLM4A2489;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Sync/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +507,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4NLM4A2489;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Sync/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
