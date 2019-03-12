@@ -10,7 +10,7 @@ import UIKit
 import CocoaAsyncSocket
 import Alamofire
 
-
+    
 class ViewController: UIViewController, GCDAsyncSocketDelegate{
 //    @IBOutlet var serverInput:UITextField!
     
