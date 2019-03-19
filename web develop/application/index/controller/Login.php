@@ -10,10 +10,11 @@ class Login extends Controller
 {
 	public function index(){
 		return view('login');
+		
 	}
 	public function post(Request $request){
 		$post=$request->param();
-		
+		dump($post);
 		$validate = validate::make([
 			'username'=>'require',
 			'password'=>'require|min:6|max:20',	
@@ -33,7 +34,6 @@ class Login extends Controller
 		public function logout(){
 			session('username',null);
 			return $this->redirect('./login');
-
 
 		}
 
