@@ -1,0 +1,33 @@
+import java.sql.*;
+
+
+public class DBconnect {
+private static String USER = "root";
+private static String PASSWORD = "fxsgjzx217";
+private static String DB_URL = "jdbc:mysql://localhost:3306/test";
+private static String DB_DRIVER = "com.mysql.jdbc.Driver";
+//  private static String SQL = "";
+private static Connection connection = null;
+
+//connect to DB
+public static Connection getConnection(){
+
+try {
+Class.forName(DB_DRIVER);
+connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+} catch (Exception e) {
+System.out.println("connection fails");
+}
+return connection;
+}
+public  static void closeConnection(Connection connection){
+
+if(connection != null){
+try {
+connection.close(); // close connection
+} catch (SQLException e) {
+e.printStackTrace();
+}
+}
+}
+}
