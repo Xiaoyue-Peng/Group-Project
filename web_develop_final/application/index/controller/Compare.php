@@ -31,6 +31,7 @@ class Compare extends Controller
 		return $this->fetch('compare',[
 			'filename_compare' => $res_2['0']['file_name'],
 			'content_compare'=>$res_2['0']['content'],
+			'user_compare'=>$res_2['0']['update_usr'],
 			'filename' => $res['0']['file_name'],
 			'content'=>$res['0']['content'],
 			'file_ini_id'=>$file_ini_id

@@ -105,17 +105,17 @@ class Edit extends Controller
 				'file_ini_id'=> $post['file_ini_id'],
 				'co_user'=> $post['coodinator']
 			]);
-			return $this->success('yeh');
+			return $this->success('yeh! add success');
 		}
 		else {
-			return $this->error('creator');
+			return $this->error('creator not exists');
 			}
 		}
 		else{ 
-			return $this->error('exists');
+			return $this->error('coordinator already exists');
 		}
 		}else{
-			return $this->error('wrong');
+			return $this->error('wrong,user not exits');
 		}
 	}
 
@@ -130,9 +130,9 @@ class Edit extends Controller
          	->where('file_ini_id',$post['file_ini_id'])
          	->where('co_user',$post['coodinator'])
          	->delete(); 
-        return $this->success('yeh');
+        return $this->success('yeh! delete success');
     }  else{ 
-         return $this->error('not exists');
+         return $this->error('user not exists');
     	}
     }
 
@@ -142,6 +142,6 @@ class Edit extends Controller
     Db::table('file_tb')
         ->where('file_id',$post['file_id'])
         ->delete();
-    return $this->redirect('./index','yeh'); 
+    return $this->redirect('./index'); 
     }    
 }

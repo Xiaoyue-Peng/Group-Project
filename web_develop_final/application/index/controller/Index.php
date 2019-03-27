@@ -19,7 +19,7 @@ class Index extends controller
         ->field('file_ini_id')
         ->group('file_ini_id')
         ->select();
-        //循环
+
         for ($i=0;$i<count($file_co);$i++){ 
         $version[$i]=Db::table('file_tb')
         ->where('file_ini_id',implode($file_co[$i]))
@@ -35,21 +35,43 @@ class Index extends controller
         ->where('usrname',session('username'))
         ->select();
 
-        $err = Db::table('err_tb')
+        $err_1 = Db::table('err_tb')
+            ->field('file_ini_id')
+            ->group('file_ini_id')
             ->select();
-
-        return $this->fetch('index',[
+          
+        for ($i=0;$i<count($err_1);$i++){ 
+        $m=0;
+        $err_2[$i] =Db::table('authority_tb')
+            ->where('file_ini_id',implode($err_1[$i]))
+            ->where('co_user',session('username'))
+            ->select(); 
+        $m++;
+        if($err_2[$i]){
+            $err[$i] = Db::table('err_tb')
+                ->where('file_ini_id',$err_2[$i][0]['file_ini_id'])
+                ->select();
+            return $this->fetch('index',[
             'file_own' => $file_own,
             'user'=>$user[0]['usrname'],
             'create_time'=> $user[0]['create_time'],
             'info'=>$user[0]['info'],
-             'error'=>$err
+             'error'=>$err[$i]
         ]);
-
-
-        //主页文件传输
-    //     for ($i=0;$i<=3;$i++){ 
-    //return $file_own;   
+            }
+        if (!$err_2[$i]&&$m==count($err_1))
+            {
+            return $this->fetch('index',[
+                'file_own' => $file_own,
+                'user'=>$user[0]['usrname'],
+                'create_time'=> $user[0]['create_time'],
+                'info'=>$user[0]['info'],
+                 'error'=>' '
+            ]);
+            }
+            
+       
+        }  
     }
    
     public function create(){
@@ -57,7 +79,8 @@ class Index extends controller
         File_tb::create([
             'file_ini_id' =>$ini_id,
             'file_name' => 'unamed',
-            'create_usr'=>session('username'), 
+            'create_usr'=>session('username'),
+            'update_usr'=>session('username'),  
                     ]);
         Authority_tb::create([
             'file_ini_id' =>$ini_id,
@@ -71,7 +94,6 @@ class Index extends controller
     
     public function upload()
     {
-        //判断文件上传是否出错
         $file=$this->request->file("file");
         if($_FILES["file"]["error"])
         {
@@ -79,14 +101,13 @@ class Index extends controller
         }
         else
         {
-            //控制上传的文件类型，大小
+            //control file format and size
             if($_FILES["file"]["type"]=="text/plain"||$_FILES["file"]["type"]=="application/octet-stream"&&$_FILES["file"]["size"]<1024000)
             {            
                 $file_exists=Db::table('file_tb')->where('file_name',$_FILES["file"]["name"])->find();      
                 if ($file_exists)
                 {
                     echo "File exists!";
-                    //选择是否替换
                 }
                 else
                 {
@@ -98,6 +119,7 @@ class Index extends controller
                         'file_ini_id' =>$ini_id,
                         'content'=>$content,
                      'create_usr'=>session('username'),
+                     'update_usr'=>session('username'), 
                     ]);
                     
                     Authority_tb::create([
