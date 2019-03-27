@@ -1,31 +1,32 @@
   {extend name='./common/father' /}
   {block name='mid'} 
   <script type="text/javascript" src="js/materialize.min.js"></script>
-  
+     <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 100%;">
 
   <div class="row">
       <div class="col s3">      
 		<table class="card-panel teal lighten-5">
         <thead>
           <tr>
-              <th>User Detail</th>
+              <h5 class="font-i">User Detail</h5>
           </tr>
         </thead>          
-        <tbody >
+        <tbody>
           <tr>
-            <td>Username:{$user}</td>
+            <td class="font-e">Username:  {$user}</td>
           </tr>
           <tr>
-            <td>Create time:{$create_time}</td>
+            <td class="font-e">Create time:  {$create_time|date="Y-m-d H:i:s"}</td>
           </tr>
           <tr>
-            <td>Info:{$info}</td>
+            <td class="font-e">Info:  {$info}</td>
           </tr>
         </tbody>
       </table>
 
-	  <div >
-       <table class="card-panel white lighten-2">
+	  <div>
+      <h5 class="font-i">Error News</h5>
+       <table class="card-panel teal lighten-5">
         <thead>
           <tr>
               <th>fileID</th>
@@ -34,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          {volist name="error" id="vo" }
+          {volist name="error" id="vo"}
             <tr>
                   <td>{$vo.file_ini_id}</td>
                   <td>{$vo.err_history}</td> 
@@ -47,7 +48,9 @@
       </div>
 
   <div class="col s9">
-    <table class="striped">
+    <h3 class="font-a"> Your Files</h3>
+    <div class="table-my">
+      <table class="striped">
 	        <thead>
 	          <tr>
 	              <th>fileID</th>
@@ -67,10 +70,10 @@
             {/volist}
           {/volist}
             </tr>        
-          }
 	        </tbody>
 	</table>
     <br>
+    <h5 class="font-e">Click to upload file:</h5>
     <form action="index/upload" method="post" enctype="multipart/form-data" >
           <input type="file" name="file" value="choose file"/>
           <input type="submit" value="submit"/>
