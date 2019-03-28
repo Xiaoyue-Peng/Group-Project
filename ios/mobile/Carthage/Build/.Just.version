@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.7.1",
+  "iOS" : [
+    {
+      "name" : "Just",
+      "hash" : "e8dc0e6bb8a972425bd13ca59af7282cfbb1f039c4adf1b69ef7065a2cf748b2"
+    }
+  ]
+}

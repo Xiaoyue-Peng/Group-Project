@@ -1,0 +1,4 @@
+framework module Just {
+  header "Just-Swift.h"
+  requires objc
+}
