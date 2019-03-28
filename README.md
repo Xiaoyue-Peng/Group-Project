@@ -1,4 +1,3 @@
-### FileSynchroniser<br>
 
 Group Project 2019@KCL Group: Keep Trying<br>
 <br>
@@ -25,5 +24,4 @@ Mobile Client:swift5,ios<br>
 <br>
 ### Install Application<br>
 Desktop:Open the web page and run<br>
-Mobile:Open the source file and run<br>
 

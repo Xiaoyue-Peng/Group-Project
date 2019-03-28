@@ -1,0 +1,112 @@
+  {extend name='./common/father' /}
+  {block name='mid'} 
+
+  <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 100%;">
+
+  <div class="row">
+    <div class="col s3">
+		  <table class="table-edit">
+      <tbody>
+        <tr class="font-o">
+          <td>
+          <form action="edit/delete" method="GET|POST">  
+            <div align="left" style="float:left" >
+              Filename: {$filename}
+            </div>
+            {if condition="session('username') == $creator"}
+            <div align="right" style="float:right" >
+              <input type="hidden" name="file_id" value={$file_id} />  
+              <button class="btn-small">delete</button>
+            </div>
+            {else /}         
+            {/if}
+          </form>
+        </td>
+      </tr>
+        <tr class="font-o"><td height="10px">Creator: {$creator}</td></tr>
+        <tr class="font-o"><td>Last update: {$lastupdate|date="Y-m-d H:i:s"}</td></tr>
+        <tr class="font-o"><td>Coodinator: {$coodinator}</td></tr>
+      <tr class="font-i">
+        <td> 
+          {if condition="session('username') == $creator"}
+           <form action="edit/add_co">
+             <input type="hidden" name="file_ini_id" value={$file_ini_id} />
+                <p>Add coodinator(by username):</p>
+              <div align="left" style="float:left">
+                <input type="text" name="coodinator">
+              </div>
+              <div align="right" style="float:right">
+                <button class="btn-small">add</button>
+              </div>
+            </form>
+          </td> 
+        </tr>
+        <tr class="font-i">
+          <td>
+            <form action="edit/delete_co">
+              <input type="hidden" name="file_ini_id" value={$file_ini_id} />
+              <p>Delete coodinator(by username):</p>
+              <div align="left" style="float:left">
+                <input type="text" name="coodinator">
+              </div>
+              <div align="right" style="float:right">
+                <button class="btn-small">delete</button>
+              </div>
+            </form>
+          </td> 
+        </tr>
+          {else /}         
+          {/if}
+        </tbody>
+      </table>
+
+
+	  <div >
+       <table class="card-panel white lighten-2">
+        <thead>
+          <tr>
+              <th>file id</th>
+              <th>update user</th>
+              <th>update time</th>
+          </tr>
+        </thead>
+        <tbody>    
+            {volist name="old_version" id="vo" }
+              <tr>
+                <td><a href="./edit?fileid={$vo.file_id}">{$vo.file_id}</a></td>
+                <td>{$vo.update_usr}</td> 
+                <td>{$vo.update_time|date="Y-m-d H:i:s"}</td>
+              </tr> 
+            {/volist}
+           
+        </tbody>
+      </table>   
+	   
+	  </div>
+	 
+  </div>
+  <form action="edit/update" method="GET|POST">
+    <div class="col s9" >
+      <div class="table-my">
+        <input type="hidden" name="file_id" value={$file_id} />
+        <input type="hidden" name="pre_id_1" value={$pre_id} />
+        <input type="hidden" name="file_ini_id" value={$file_ini_id} />
+        <input type="hidden" name="creator" value={$creator} />
+        <h5 style="color:teal; font-weight: 700;">filename:</h5>
+        <input type="text" name="filename_update" value={$filename} />
+        <h5 style="color:teal; font-weight: 700;">content:</h5>
+        <textarea name="content_update">{$content}</textarea>
+        <button class="btn btn-primary btn-block">upload</button>
+      </div>
+    </div>
+  </form>
+</div>
+	
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="js/jquery-3.3.1.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </body>
+    {/block}
+  </html>
+        
