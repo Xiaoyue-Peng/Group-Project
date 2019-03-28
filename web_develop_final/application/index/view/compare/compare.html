@@ -1,0 +1,42 @@
+  {extend name='./common/father' /}
+  {block name='mid'} 
+
+  <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 100%;">
+
+  <div class="row">
+    <h5 style="color:teal; font-weight: 700;text-align: center;">Conflit Exists: two files meet Synchronization problem</h5>
+    <div class="col s5">
+    <div class="table-edit">
+      <h5 style="color:teal; font-weight: 700;text-align: center;">Latest Version (read only)</h5>
+      <form action="compare/update" method="GET|POST">
+        <input type="hidden" name="file_ini_id" value={$file_ini_id} />
+        <h5>filename:{$filename_compare}</h5>
+        <p class="font-u">updated by {$user_compare}</p>
+        <textarea name="content_compare" readonly>{$content_compare}</textarea>
+        <input class="btn btn-primary btn-block" type="submit" value="choose this"/>
+     </form>
+    </div> 
+  </div>
+
+    <div class="col s7" >
+      <div class="table-compare">
+        <form action="compare/contain" method="GET|POST">
+          <h5 style="color:teal; font-weight: 700;text-align: center;">Your Version (edit available)</h5>
+          <input type="hidden" name="file_ini_id" value={$file_ini_id} />
+        <h5>filename:</h5>
+        <input type="text" name="filename" value={$filename} />
+        <textarea name="content">{$content}</textarea>
+        <input class="btn btn-primary btn-block" type="submit" value="choose this"/>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="js/jquery-3.3.1.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </body>
+    {/block}
+  </html>
+        
