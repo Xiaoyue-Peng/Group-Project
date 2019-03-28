@@ -19,7 +19,6 @@ Group Project 2019@KCL Group: Keep Trying<br>
 * Rename file<br>
 * File version<br>
 * Transfer between two different clients<br>
-<br>
 ### Language Selection and Platform<br>
 Desktop Client: php<br>
 Mobile Client:swift5,ios<br>
