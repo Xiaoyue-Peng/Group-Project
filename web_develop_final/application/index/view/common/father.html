@@ -18,11 +18,11 @@
      
 	<nav>
   <div class="nav-wrapper">
-    <a href="../index" class="brand-logo">KEEP TRYING</a>
+    <a href="./index" class="brand-logo">KEEP TRYING</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
     {if session('uid')}
       <li><a href="">{:session('username')}</a></li>
-      <li><a href="{:url('Password/index')}">reset password</a></li>
+      <li><a href="{:url('./Password')}">reset password</a></li>
       <li><a href="{:url('Login/logout')}">log out</a></li>
       {else /}
       <li><a href="./login">login</a></li>

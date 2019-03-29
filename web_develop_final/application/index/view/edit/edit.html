@@ -1,11 +1,11 @@
   {extend name='./common/father' /}
   {block name='mid'} 
 
-  <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 100%;">
+  <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 1450px 900px;">
 
   <div class="row">
     <div class="col s3">
-		  <table class="table-edit">
+      <table class="table-edit">
       <tbody>
         <tr class="font-o">
           <td>
@@ -15,7 +15,7 @@
             </div>
             {if condition="session('username') == $creator"}
             <div align="right" style="float:right" >
-              <input type="hidden" name="file_id" value={$file_id} />  
+              <input type="hidden" name="file_ini_id" value={$file_ini_id} />  
               <button class="btn-small">delete</button>
             </div>
             {else /}         
@@ -26,7 +26,7 @@
         <tr class="font-o"><td height="10px">Creator: {$creator}</td></tr>
         <tr class="font-o"><td>Last update: {$lastupdate|date="Y-m-d H:i:s"}</td></tr>
         <tr class="font-o"><td>Coodinator: {$coodinator}</td></tr>
-      <tr class="font-i">
+      <tr class="font-z">
         <td> 
           {if condition="session('username') == $creator"}
            <form action="edit/add_co">
@@ -41,7 +41,7 @@
             </form>
           </td> 
         </tr>
-        <tr class="font-i">
+        <tr class="font-z">
           <td>
             <form action="edit/delete_co">
               <input type="hidden" name="file_ini_id" value={$file_ini_id} />
@@ -60,48 +60,45 @@
         </tbody>
       </table>
 
-
-	  <div >
+  <h5 class="font-i">History Version</h5>
+  <div class="font-m">Version &nbsp update_user &nbsp &nbsp update time</div>
+    <div style="height:200px;overflow-y:scroll;overflow-x:none;margin-top: -6px;margin-bottom: -5px;">
        <table class="card-panel white lighten-2">
-        <thead>
-          <tr>
-              <th>file id</th>
-              <th>update user</th>
-              <th>update time</th>
-          </tr>
-        </thead>
         <tbody>    
             {volist name="old_version" id="vo" }
               <tr>
-                <td><a href="./edit?fileid={$vo.file_id}">{$vo.file_id}</a></td>
-                <td>{$vo.update_usr}</td> 
+                <td style="width: 70px;text-align: center;"><a href="./edit?fileid={$vo.file_id}">{$vo.pre_id}</a></td>
+                <td style="width: 100px;">&nbsp &nbsp {$vo.update_usr}</td> 
                 <td>{$vo.update_time|date="Y-m-d H:i:s"}</td>
               </tr> 
             {/volist}
            
         </tbody>
       </table>   
-	   
-	  </div>
-	 
+     
+    </div>
+   
   </div>
-  <form action="edit/update" method="GET|POST">
+  <form action="edit/update">
     <div class="col s9" >
       <div class="table-my">
         <input type="hidden" name="file_id" value={$file_id} />
         <input type="hidden" name="pre_id_1" value={$pre_id} />
         <input type="hidden" name="file_ini_id" value={$file_ini_id} />
-        <input type="hidden" name="creator" value={$creator} />
+        <input type="hidden" name="creator" value='{$creator}' />
         <h5 style="color:teal; font-weight: 700;">filename:</h5>
-        <input type="text" name="filename_update" value={$filename} />
+        <input type="text" name="filename_update" value='{$filename}' />
         <h5 style="color:teal; font-weight: 700;">content:</h5>
         <textarea name="content_update">{$content}</textarea>
-        <button class="btn btn-primary btn-block">upload</button>
+        <button class="btn btn-primary btn-block" style="float: left;">upload</button>
       </div>
     </div>
   </form>
+  <a href="./index" class="btn-large" style="float: right;margin-right: 120px;margin-top: 40px;">BACK</a>
 </div>
-	
+
+
+  
       <!--JavaScript at end of body for optimized loading-->
       <script type="text/javascript" src="js/materialize.min.js"></script>
       <script src="js/jquery-3.3.1.min.js"></script>

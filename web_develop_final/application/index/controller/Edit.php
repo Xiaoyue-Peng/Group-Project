@@ -17,6 +17,7 @@ class Edit extends Controller
 			->where('file_id',$fileid)->find();
 		$old_version = Db::table('file_tb')
 			->where('file_ini_id',$res['file_ini_id'])
+			->order('file_id desc')
 			->select();
 
 		$coodinator_array = Db::table('authority_tb')
@@ -40,53 +41,81 @@ class Edit extends Controller
             'coodinator' => $co,
     	]);
 	}
+	public function read(){
+		return $this->error('wrong url,please check');
+	}
 
 	public function update(Request $request){
 		$post=$request->param();
-		$validate = validate::make([
-			'filename_update'=>'require',
-		]);
-		$status = $validate->check($post);
-		if ($status) {
-			$pre_id_2 = Db::table('file_tb')
-				->where('file_ini_id',$post['file_ini_id'])
-        		->max('pre_id');
-
-			$ini_id = Db::table('file_tb')
+		$file_exits = Db::table('file_tb')
 				->where('file_id',$post['file_id'])
-				->field('file_ini_id')
 				->find();
+		if ($file_exits){
+				$file_belong = Db::table('authority_tb')
+					->where('file_ini_id',$post['file_ini_id'])
+					->where('co_user',session('username'))
+					->find();
+			if($file_belong){
 
-			$version=Db::table('file_tb')
-        		->where('file_ini_id',implode($ini_id))
-       			->max('pre_id');
+				$validate = validate::make([
+					'filename_update'=>'require',
+				]);
+				$status = $validate->check($post);
+				if ($status) {
+					$pre_id_2 = Db::table('file_tb')
+						->where('file_ini_id',$post['file_ini_id'])
+		        		->max('pre_id');
 
-       		File_tb::create([
-                'file_name'=>$post['filename_update'],
-                'file_ini_id' =>$post['file_ini_id'],
-                'content'=>$post['content_update'],
-                'create_usr'=>$post['creator'],
-                'update_usr'=>session('username'),
-                'pre_id'=> $version+1 
-                    ]);
+					$ini_id = Db::table('file_tb')
+						->where('file_id',$post['file_id'])
+						->field('file_ini_id')
+						->find();
 
-			if ($post['pre_id_1'] == strval($pre_id_2))
-			{	
-			return $this->redirect('./index');
-		}else{
-			//have conflit, add data into Err_tb and return to compare.html
-			Err_tb::create([
-                'file_ini_id' =>$post['file_ini_id'],
-                'update_usr'=>session('username'),
-                'err_history'=>'Synchronization problem'
-            ]);
-			return $this->redirect("./Compare",['fileid'=>$post['file_ini_id']]);
+					$version=Db::table('file_tb')
+		        		->where('file_ini_id',implode($ini_id))
+		       			->max('pre_id');
+
+		       		File_tb::create([
+		                'file_name'=>$post['filename_update'],
+		                'file_ini_id' =>$post['file_ini_id'],
+		                'content'=>$post['content_update'],
+		                'create_usr'=>$post['creator'],
+		                'update_usr'=>session('username'),
+		                'pre_id'=> $version+1 
+		                    ]);
+
+					if ($post['pre_id_1'] == strval($pre_id_2))
+					{	
+						$version=Db::table('file_tb')
+		        		->where('file_ini_id',$post['file_ini_id'])
+		       			->max('pre_id');
+						$file_id=Db::table('file_tb')
+						->where('file_ini_id',$post['file_ini_id'])
+						->where('pre_id',$version)
+						->select();		
+					return $this->redirect("./edit",['fileid'=>$file_id[0]['file_id']]);
+					}else{
+
+						Err_tb::create([
+			                'file_ini_id' =>$post['file_ini_id'],
+			                'update_usr'=>session('username'),
+			                'err_history'=>'Synchronization problem'
+		            	]);
+						return $this->redirect("./Compare",['fileid'=>$post['file_ini_id']]);
+					}
+				}
+			else{
+				return $this->error('failed,filename needed');
+				}
+			}
+		else{
+			return $this->error('failed,you have no permission','./index');
 		}
 	}
 	else{
-		return $this->error('failed,filename needed');
-		}
+		return $this->error('failed,filename deleted','./index');
 	}
+}
 	
 	//add coodinator
 	public function add_co(Request $name){
@@ -140,7 +169,13 @@ class Edit extends Controller
     public function delete(Request $name){
     $post=$name->param();
     Db::table('file_tb')
-        ->where('file_id',$post['file_id'])
+        ->where('file_ini_id',$post['file_ini_id'])
+        ->delete();
+    Db::table('authority_tb')
+        ->where('file_ini_id',$post['file_ini_id'])
+        ->delete();
+    Db::table('err_tb')
+        ->where('file_ini_id',$post['file_ini_id'])
         ->delete();
     return $this->redirect('./index'); 
     }    

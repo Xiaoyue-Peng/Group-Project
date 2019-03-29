@@ -27,27 +27,27 @@ class Register extends Controller
 		->find();
 		if(!$user_exist){
 		$status = $validate->check($post);
-		if ($status){
-			Usr_tb::create([
-				'usrname'=>$post['username'],
-				'passwd'=>md5($post['password']),
-				'info'=>$post['info']
-			]);
-			$ini_id=rand();
-			File_tb::create([
-				'file_ini_id'=>$ini_id,
-				'file_name'=>'example file',
-				'create_usr'=>$post['username'],
-				'content'=>'Edit your content here.',
-			]);
-			Authority_tb::create([
-				'file_ini_id'=>$ini_id,
-				'co_user'=>$post['username'],
-			]);
-			return $this->success('success,please log in','./login');
-		}else{
-			return $this->error('failed');
-		}
+			if ($status){
+				Usr_tb::create([
+					'usrname'=>$post['username'],
+					'passwd'=>md5($post['password']),
+					'info'=>$post['info']
+				]);
+				$ini_id=rand();
+				File_tb::create([
+					'file_ini_id'=>$ini_id,
+					'file_name'=>'example file',
+					'create_usr'=>$post['username'],
+					'content'=>'Edit your content here.',
+				]);
+				Authority_tb::create([
+					'file_ini_id'=>$ini_id,
+					'co_user'=>$post['username'],
+				]);
+				return $this->success('success,please log in','./login');
+			}else{
+				return $this->error('failed,username or password  not meet requirement');
+			}
 	}else{
 			return $this->error('username exists');
 		}

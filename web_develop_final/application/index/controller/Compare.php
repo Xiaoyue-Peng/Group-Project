@@ -82,6 +82,17 @@ class Compare extends Controller
 			->where('file_ini_id',$post['file_ini_id'])
 			->where('pre_id',$version)
 			->select();	
+		Db::table('file_tb')
+			->where('file_ini_id',$post['file_ini_id'])
+			->where('pre_id',$version)
+			->update([
+			'file_name'=>$post['filename'],
+			'content'=>$post['content']
+		]);
 		return $this->redirect("./edit",['fileid'=>$file_id[0]['file_id']]);
+
+
+
+
 	}   
 }

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <BODY style="background-image : url(/static/index/images/home.jpg);background-repeat : no-repeat;background-size: 140%;">
+    <BODY style="background-image : url(/static/index/images/home.jpg);background-repeat : no-repeat;background-size: 1450px 900px;">
    
 	<div class="lowin lowin-blue">
         <div class="lowin-brand">
@@ -25,12 +25,12 @@
 							<input type="text" name="username" autocomplete="username" class="lowin-input">
 						</div>
 						<div class="lowin-group">
-							<label>Password</label>
-							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
+							<label>Password (6-20 character)</label>
+							<input type="password" name="password" autocomplete="current-password" id="password" class="lowin-input">
 						</div>
 						<div class="lowin-group">
 							<label>password confirm</label>
-							<input type="password" class="lowin-input" id="conpass" name="password_confirm" />
+							<input type="password" class="lowin-input" id="conpass" name="password_confirm" onblur="check2pwd()" />
 				</div>
 				<div class="lowin-group">
 							<label>Introduce yourself</label>
@@ -49,6 +49,23 @@
 			
             
 		</div>
+
+	<script>  
+            function check2pwd() {  
+                    if(password.value != conpass.value) {  
+                        alert("password and confirm_password must be consistent")  
+                        password.value = "";  
+                        conpass.value = "";  
+                    }  
+            }  
+        </script>  
+  <form   name="theform">   
+  <input   type="text"   id="pswc"   name="pswc">   
+  
+   
+  <input   type="text"   id=psw   name="psw">   
+  <input   type="button"   onclick=alert(f1())>   
+  </form>
 	
     <footer class="lowin-footer">
         <br>DESIGNED BY KEEPTRYING GROUP  <a href="https://kcl.ac.uk" target="_blank" ></br>

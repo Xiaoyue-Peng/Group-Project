@@ -1,7 +1,7 @@
   {extend name='./common/father' /}
   {block name='mid'} 
   <script type="text/javascript" src="js/materialize.min.js"></script>
-     <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 100%;">
+     <BODY style="background-image : url( /static/index/images/edit.jpg);background-repeat:repeat;background-size: 1450px 900px;">
 
   <div class="row">
       <div class="col s3">      
@@ -24,8 +24,8 @@
         </tbody>
       </table>
 
-	  <div>
-      <h5 class="font-i">Error News</h5>
+    <h5 class="font-i">Error News</h5>
+	  <div style="height:300px;overflow-y:scroll;overflow-x:none;">
        <table class="card-panel teal lighten-5">
         <thead>
           <tr>
@@ -35,11 +35,13 @@
           </tr>
         </thead>
         <tbody>
-          {volist name="error" id="vo"}
+          {volist name="error" id="k"}
+            {volist name="k" id="vo"}
             <tr>
                   <td>{$vo.file_ini_id}</td>
                   <td>{$vo.err_history}</td> 
                   <td>{$vo.update_time|date="Y-m-d H:i:s"}</td>
+              {/volist}
             {/volist}
             </tr>  
         </tbody>
@@ -50,6 +52,7 @@
   <div class="col s9">
     <h3 class="font-a"> Your Files</h3>
     <div class="table-my">
+      <div style="height:301px;overflow-y:scroll;overflow-x:none;">
       <table class="striped">
 	        <thead>
 	          <tr>
@@ -72,16 +75,39 @@
             </tr>        
 	        </tbody>
 	</table>
+  </div>
     <br>
-    <h5 class="font-e">Click to upload file:</h5>
-    <form action="index/upload" method="post" enctype="multipart/form-data" >
-          <input type="file" name="file" value="choose file"/>
-          <input type="submit" value="submit"/>
-    </form>
-    <br>
+<script type="text/javascript"> 
+function openBrowse(){ 
+var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false; 
+if(ie){ 
+document.getElementById("file").click(); 
+document.getElementById("filename").value=document.getElementById("file").value;
+}else{
+var a=document.createEvent("MouseEvents");//FF的处理 
+a.initEvent("click", true, true);  
+document.getElementById("file").dispatchEvent(a); 
+} 
+} 
+</script> 
     <form action="index/create" method="post">
           <input class="btn btn-primary btn-block" type="submit" value="create new file"/>
     </form>  
+    <br>
+    <!-- <h5 class="font-e">Click to upload file:</h5> -->
+    <form action="index/upload" method="post" enctype="multipart/form-data" >
+      <div style="position:relative;">   
+      <!-- <input type="text" id="f_file" style="width:200px;float: left;font-size: 25px;font-weight: 200px;margin-right: 20px;" value="click to choose file" />  -->
+      <button style="width:250px;float: left;font-size: 20px;font-weight: 150px;margin-right: 20px;background-color: white;color: black;height: 34px" id="btn" name="btn">CHOOSE LOCAL FILE</button>
+        <input type="file" id="InpFileUpload" name="file" style="position:absolute; filter:alpha(opacity=0); -moz-opacity:0; opacity: 0;top:0px;left:0px;width:250px;height: 34px;" onchange="$('#f_file').val($('#file').val())" hidefocus />
+         <input type="submit" id="BtnBrowse" class="btn-small" value="submit" />
+    </div>
+         <!--  <input type="file" name="file" value="choose file"/>
+          <input type="submit" value="submit"/> -->
+
+    </form>
+
+
   </div>
   </div>
  

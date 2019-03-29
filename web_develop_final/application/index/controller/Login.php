@@ -13,12 +13,7 @@ class Login extends Controller
 	}
 	public function post(Request $request){
 		$post=$request->param();
-		$validate = validate::make([
-			'username'=>'require',
-			'password'=>'require|min:6|max:20',	
-		]);
-		$status = $validate->check($post);
-		if ($status){
+		if ($post){
 			$user = Db::table('usr_tb')
 			->where('usrname',$post['username'])
 			->where('passwd',md5($post['password']))
@@ -32,6 +27,7 @@ class Login extends Controller
 				return $this->error('failed,wrong username or password');
 			}
 		}
+
 	}
 	public function logout(){
 		session('username',null);

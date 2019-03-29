@@ -39,39 +39,64 @@ class Index extends controller
             ->field('file_ini_id')
             ->group('file_ini_id')
             ->select();
-          
-        for ($i=0;$i<count($err_1);$i++){ 
-        $m=0;
-        $err_2[$i] =Db::table('authority_tb')
-            ->where('file_ini_id',implode($err_1[$i]))
-            ->where('co_user',session('username'))
-            ->select(); 
-        $m++;
-        if($err_2[$i]){
-            $err[$i] = Db::table('err_tb')
-                ->where('file_ini_id',$err_2[$i][0]['file_ini_id'])
-                ->select();
-            return $this->fetch('index',[
-            'file_own' => $file_own,
-            'user'=>$user[0]['usrname'],
-            'create_time'=> $user[0]['create_time'],
-            'info'=>$user[0]['info'],
-             'error'=>$err[$i]
-        ]);
+        if($err_1){ 
+            for ($i=0;$i<count($err_1);$i++){      
+                $err_2[$i] = Db::table('authority_tb')
+                ->where('file_ini_id',implode($err_1[$i]))
+                ->where('co_user',session('username'))
+                ->field('file_ini_id')
+                ->select(); 
+            } 
+            for ($i=0;$i<count($err_2);$i++){ 
+                if($err_2[$i]){  
+                    $err[$i] = Db::table('err_tb')
+                        ->where('file_ini_id',implode($err_2[$i][0]))
+                        ->order('Err_id desc')
+                        ->select();
+                }       
             }
-        if (!$err_2[$i]&&$m==count($err_1))
-            {
-            return $this->fetch('index',[
+            //array_reduce and judge empty
+            $result = array_reduce($err_2, 'array_merge', array());
+            $result_2 = array_reduce($result, 'array_merge', array());
+            $str = implode(',',$result_2);
+
+            if (!empty($str)){
+                return $this->fetch('index',[
+                    'file_own' => $file_own,
+                    'user'=>$user[0]['usrname'],
+                    'create_time'=> $user[0]['create_time'],
+                    'info'=>$user[0]['info'],
+                     'error'=>$err
+                    ]);
+                }
+        }  
+        if (empty($file_own)){
+            if(empty($user[0]['usrname'])){
+                session_destroy();
+                    return $this->fetch('index',[
+                    'file_own' => ' ',
+                    'user'=>' ',
+                    'create_time'=>' ',
+                    'info'=>' ',
+                     'error'=>' '
+                    ]);
+                }else{
+                return $this->fetch('index',[
+                    'file_own' => ' ',
+                    'user'=>$user[0]['usrname'],
+                    'create_time'=> $user[0]['create_time'],
+                    'info'=>$user[0]['info'],
+                     'error'=>' '
+                    ]);
+                }
+                }
+        return $this->fetch('index',[
                 'file_own' => $file_own,
                 'user'=>$user[0]['usrname'],
                 'create_time'=> $user[0]['create_time'],
                 'info'=>$user[0]['info'],
                  'error'=>' '
-            ]);
-            }
-            
-       
-        }  
+            ]);    
     }
    
     public function create(){

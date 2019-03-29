@@ -37,8 +37,5 @@ class Password extends Controller
 			}
 		}
 	}
-	public function logout(){
-		session('username',null);
-		return $this->redirect('./login');
-		}  
+
 }
