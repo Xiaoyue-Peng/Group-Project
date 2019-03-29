@@ -1,0 +1,4 @@
+github "Alamofire/Alamofire" "5.0.0-beta.3"
+github "JustHTTP/Just" "0.7.1"
+github "SwiftyJSON/SwiftyJSON" "4.2.0"
+github "tristanhimmelman/ObjectMapper" "3.4.2"
